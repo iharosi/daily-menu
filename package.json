@@ -1,0 +1,26 @@
+{
+  "name": "daily-menu",
+  "version": "0.0.1",
+  "description": "Collects daily menus from pages of restaurants and provide a Web API to query them",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iharosi/daily-menu.git"
+  },
+  "author": "Gergely Iharosi",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "4.0.0",
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv": "^5.0.0",
+    "express": "^5.0.0-alpha.6",
+    "moment": "^2.20.1",
+    "morgan": "^1.9.0",
+    "request": "^2.83.0",
+    "serve-favicon": "^2.4.5"
+  }
+}

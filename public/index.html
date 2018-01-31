@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h2>
+            Query daily menus of restaurant webpages<br>
+            <small class="text-muted">through this Web API</small>
+          </h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Endpoint</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/</code></td>
+                <td>This page</td>
+              </tr>
+              <tr>
+                <td><code>/restaurant</code></td>
+                <td>
+                  List of available restaurants<br><br>
+                  <code>GET /restaurant</code><br>
+                  <pre>
+[
+  {
+    "id": "bridges",
+    "name": "Bridges Food Bar"
+  },
+  {
+    "id": "foodie",
+    "name": ""
+  }
+]
+                  </pre>
+                </td>
+              </tr>
+              <tr>
+                <td><code>/restaurant/:restaurant-id</code></td>
+                <td>
+                  Detailed information about the given restaurant<br><br>
+                  <code>GET /restaurant/bridges</code><br>
+                  <pre>
+{
+  "id": "bridges",
+  "name": "Bridges Food Bar",
+  "logo": "http://bridges.hu/wp-content/uploads/2017/06/Bridges_FoodBar_Logo_new.png",
+  "url": "http://bridges.hu/#heti-menu",
+  "menu": [
+    "Zöldségleves",
+    "1. Csirkecomb filé rántva burgonya pürével, karottával",
+    "2. Zöldborsófőzelék erdei gombás pulyka vagdalttal"
+  ],
+  "timestamp": 1517442960397
+}
+                  </pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
