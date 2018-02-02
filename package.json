@@ -16,11 +16,13 @@
     "body-parser": "^1.18.2",
     "bootstrap": "4.0.0",
     "cheerio": "^1.0.0-rc.2",
+    "cli-color": "^1.2.0",
     "dotenv": "^5.0.0",
     "express": "^5.0.0-alpha.6",
     "moment": "^2.20.1",
     "morgan": "^1.9.0",
     "request": "^2.83.0",
-    "serve-favicon": "^2.4.5"
+    "serve-favicon": "^2.4.5",
+    "time-stamp": "^2.0.0"
   }
 }
