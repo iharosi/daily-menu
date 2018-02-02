@@ -7,37 +7,15 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
-const moment = require('moment');
 const morgan = require('morgan');
 const path = require('path');
+const service = require('./helpers/service');
 const providers = {
     bridges: require('./providers/bridges'),
     foodie: require('./providers/foodie')
 };
 const interval = 1000 * 60 * 60; // 1 hour
 const database = [];
-
-/*
- * @param {String} message Console message
- */
-const log = (message) => {
-    let formattedDate = moment().format('YYYY.MM.DD. HH:mm');
-
-    if (message) {
-        console.log(`${formattedDate} - ${message}`);
-    }
-};
-
-/*
- * @param {String} message Error message
- * @param {Number} code Error code
- */
-const exitWithError = (message, code) => {
-    if (message) {
-        console.error(message);
-    }
-    process.exit(code || 1);
-};
 
 /*
  * @param {String} id Restaurant identifier
@@ -57,7 +35,7 @@ const fetchMenus = () => {
             providers.foodie.fetch()
         ]).then((results) => {
             database.push(...results);
-            log('Restaurant pages has been fetched.');
+            service.log('Restaurant pages has been fetched.');
             resolve(database);
         }).catch(reject);
     });
@@ -72,7 +50,7 @@ const launchWebService = () => {
     app.use(morgan('dev')); /* 'default', 'short', 'tiny', 'dev' */
     app.use(bodyParser.json());
     server = app.listen(3000, () => {
-        log(`App now running on port ${server.address().port}`);
+        service.log(`App now running on port ${server.address().port}`, 'highlight');
     });
 
     app.get('/restaurant', (request, response) => {
@@ -108,7 +86,7 @@ const init = () => {
     fetchMenus()
         .then(launchWebService)
         .catch((error) => {
-            exitWithError(error.message, error.code);
+            service.exitWithError(error.message, error.code);
         });
     setInterval(fetchMenus, interval);
 };
