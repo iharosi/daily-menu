@@ -43,13 +43,14 @@ const fetchMenus = () => {
 
 const launchWebService = () => {
     let app = express();
+    let port = process.env.PORT || 3000;
     let server;
 
     app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
     app.use(express.static(path.join(__dirname, '/public')));
     app.use(morgan('dev')); /* 'default', 'short', 'tiny', 'dev' */
     app.use(bodyParser.json());
-    server = app.listen(3000, () => {
+    server = app.listen(port, () => {
         service.log(`App now running on port ${server.address().port}`, 'highlight');
     });
 
