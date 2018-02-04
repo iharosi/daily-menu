@@ -20,20 +20,26 @@ const fetch = () => {
                 reject(error);
             } else {
                 let date = new Date();
+                let today = date.getDay();
+                let menu = [];
                 let $ = cheerio.load(body);
+
+                if (today > 0 && today < 6) {
+                    menu = [].slice.call($($('section#heti-menu p')[today])
+                        .contents()
+                        .filter(function() {
+                            return this.nodeType === 3;
+                        }).map(function() {
+                            return this.nodeValue.trim();
+                        }));
+                }
 
                 resolve({
                     id: 'bridges',
                     name: $('title').text(),
                     logo: $('#header-main .img-responsive.zozo-standard-logo').attr('src'),
                     url: options.url,
-                    menu: [].slice.call($($('section#heti-menu p')[date.getDay()])
-                            .contents()
-                            .filter(function() {
-                                return this.nodeType === 3;
-                            }).map(function() {
-                                return this.nodeValue.trim();
-                            })),
+                    menu: menu,
                     timestamp: date.getTime()
                 });
             }
