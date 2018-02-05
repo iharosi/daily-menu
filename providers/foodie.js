@@ -20,7 +20,6 @@ const fetch = () => {
             if (error || response.statusCode !== 200) {
                 reject(error);
             } else {
-                let date = new Date();
                 let fbPosts;
                 let post;
                 let menu;
@@ -62,7 +61,7 @@ const fetch = () => {
                     logo: '',
                     url: post ? 'https://facebook.com/' + post.id : '',
                     menu: menu,
-                    timestamp: date.getTime()
+                    timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
                 });
             }
         });

@@ -1,6 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
+const moment = require('moment');
 const request = require('request');
 const options = {
     url: 'http://bridges.hu/#heti-menu',
@@ -34,8 +35,7 @@ const fetch = () => {
             if (error || response.statusCode !== 200) {
                 reject(error);
             } else {
-                let date = new Date();
-                let today = date.getDay();
+                let today = moment().format('d');
                 let menu = [];
                 let $ = cheerio.load(body);
                 let $days = $('section#heti-menu .vc_row.wpb_row.vc_inner.vc_row-fluid p');
@@ -60,7 +60,7 @@ const fetch = () => {
                     logo: $('#header-main .img-responsive.zozo-standard-logo').attr('src'),
                     url: options.url,
                     menu: menu,
-                    timestamp: date.getTime()
+                    timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
                 });
             }
         });

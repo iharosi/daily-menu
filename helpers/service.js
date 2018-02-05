@@ -1,6 +1,6 @@
 'use strict';
 
-const timestamp = require('time-stamp');
+const moment = require('moment');
 const c = require('cli-color');
 
 /*
@@ -8,7 +8,7 @@ const c = require('cli-color');
  * @param {String} messageType Can be the following: 'info', 'warning', 'error', 'highlight'
  */
 const log = (message, messageType = 'info') => {
-    let formattedDate = timestamp('YYYY-MM-DD HH:mm:ss');
+    let formattedDate = moment().format('YYYY-MM-DD HH:mm:ss');
     let types = {
         info: 'white',
         warning: 'yellow',
