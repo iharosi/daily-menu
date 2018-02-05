@@ -13,6 +13,21 @@ const options = {
     }
 };
 
+const getFormattedTexts = (element) => {
+    let processed = [];
+
+    if (element.childNodes) {
+        processed = []
+            .filter.call(
+                element.childNodes,
+                (item) => item.nodeType === 3
+            )
+            .map((item) => item.nodeValue.trim());
+    }
+
+    return processed;
+};
+
 const fetch = () => {
     return new Promise((resolve, reject) => {
         request(options, (error, response, body) => {
@@ -23,15 +38,20 @@ const fetch = () => {
                 let today = date.getDay();
                 let menu = [];
                 let $ = cheerio.load(body);
+                let $days = $('section#heti-menu .vc_row.wpb_row.vc_inner.vc_row-fluid p');
+                let $dessert = $('section#heti-menu .wpb_text_column.wpb_content_element p');
 
-                if (today > 0 && today < 6) {
-                    menu = [].slice.call($($('section#heti-menu p')[today])
-                        .contents()
-                        .filter(function() {
-                            return this.nodeType === 3;
-                        }).map(function() {
-                            return this.nodeValue.trim();
-                        }));
+                if (today > 0 && today < 6 && $days.length === 5) {
+                    menu = menu.concat(
+                        getFormattedTexts(
+                            $days.get(today - 1)
+                        )
+                    );
+                    menu = menu.concat(
+                        getFormattedTexts(
+                            $dessert.get(0)
+                        )
+                    );
                 }
 
                 resolve({
