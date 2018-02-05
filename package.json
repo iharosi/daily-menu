@@ -2,6 +2,9 @@
   "name": "daily-menu",
   "version": "0.0.1",
   "description": "Collects daily menus from pages of restaurants and provide a Web API to query them",
+  "engines": {
+    "node" : ">=8.9.0"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
