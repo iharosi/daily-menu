@@ -35,24 +35,22 @@ const fetch = () => {
             if (error || response.statusCode !== 200) {
                 reject(error);
             } else {
-                let today = moment().format('d');
+                let today = moment().isoWeekday();
                 let menu = [];
                 let $ = cheerio.load(body);
-                let $days = $('section#heti-menu .vc_row.wpb_row.vc_inner.vc_row-fluid p');
+                let $days = $('section#heti-menu .vc_row .parallax-desc>p:first-child');
                 let $dessert = $('section#heti-menu .wpb_text_column.wpb_content_element p');
 
-                if (today > 0 && today < 6 && $days.length === 5) {
-                    menu = menu.concat(
-                        getFormattedTexts(
-                            $days.get(today - 1)
-                        )
-                    );
-                    menu = menu.concat(
-                        getFormattedTexts(
-                            $dessert.get(0)
-                        )
-                    );
-                }
+                menu = menu.concat(
+                    getFormattedTexts(
+                        $days.get(today - 1)
+                    )
+                );
+                menu = menu.concat(
+                    getFormattedTexts(
+                        $dessert.get(0)
+                    )
+                );
 
                 resolve({
                     id: 'bridges',
@@ -60,7 +58,7 @@ const fetch = () => {
                     logo: $('#header-main .img-responsive.zozo-standard-logo').attr('src'),
                     url: options.url,
                     menu: menu,
-                    timestamp: moment().format('YYYY-MM-DD HH:mm:ss')
+                    lastUpdated: moment().format()
                 });
             }
         });
