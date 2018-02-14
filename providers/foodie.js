@@ -108,7 +108,7 @@ const fetch = () => {
                 logo: payload.logo,
                 url: payload.postUrl,
                 menu: payload.menu,
-                timestamp: moment().format()
+                lastUpdated: moment().format()
             });
         })
         .catch(reject);
