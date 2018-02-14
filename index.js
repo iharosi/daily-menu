@@ -16,13 +16,14 @@ const providers = [
     require('./providers/10minutes')
 ];
 const interval = 1000 * 60 * 60; // 1 hour
-const database = [];
+let database = [];
 
 const fetchMenus = () => {
     return new Promise((resolve, reject) => {
         Promise.all(
             providers.map((provider) => provider.fetch())
         ).then((results) => {
+            database = [];
             database.push(...results);
             service.log('Restaurant pages has been fetched.');
             resolve(database);
