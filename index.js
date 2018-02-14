@@ -18,17 +18,6 @@ const providers = [
 const interval = 1000 * 60 * 60; // 1 hour
 const database = [];
 
-/*
- * @param {String} id Restaurant identifier
- */
-const getRestaurantName = (id) => {
-    let result = database.find((restaurant) => {
-        return restaurant.id === id;
-    });
-
-    return result && result.name ? result.name : '';
-};
-
 const fetchMenus = () => {
     return new Promise((resolve, reject) => {
         Promise.all(
@@ -55,11 +44,11 @@ const launchWebService = () => {
     });
 
     app.get('/restaurant', (request, response) => {
-        let result = Object.keys(providers)
-            .map((provider) => {
+        let result = database
+            .map((restaurant) => {
                 return {
-                    id: provider,
-                    name: getRestaurantName(provider)
+                    id: restaurant.id,
+                    name: restaurant.name
                 };
             });
 
