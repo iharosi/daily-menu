@@ -8,4 +8,4 @@ Collects daily menus from pages of restaurants and provide a Web API to query th
 | -------------------------- | ------------------------------ |
 | /                          | This page                      |
 | /restaurant/               | List the available restaurants |
-| /restaurant/:restaurant-id | Get last measured data         |
+| /restaurant/:restaurant-id | Get last fetched data          |
