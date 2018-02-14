@@ -36,6 +36,9 @@ const fetch = () => {
                         if (line.match(/^\d{3,4}\.-/)) {
                             newLine = '';
                         }
+                        if (line === 'D Menü') {
+                            newLine = 'B Menü';
+                        }
 
                         return newLine;
                     })
