@@ -65,9 +65,9 @@ const launchWebService = () => {
         if (result) {
             response.status(200).json(result);
         } else {
-            response.status(404).json({
-                error: `The restaurant identifier, „${request.params.restaurant}” can not be found.`
-            });
+            response.status(404).send(
+                `Sorry, this restaurant identifier can not be found: ${request.params.restaurant}`
+            );
         }
     });
 };
