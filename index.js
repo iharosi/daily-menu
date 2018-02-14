@@ -10,10 +10,11 @@ const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const path = require('path');
 const service = require('./helpers/service');
-const providers = {
-    bridges: require('./providers/bridges'),
-    foodie: require('./providers/foodie')
-};
+const providers = [
+    require('./providers/bridges'),
+    require('./providers/foodie'),
+    require('./providers/10minutes')
+];
 const interval = 1000 * 60 * 60; // 1 hour
 const database = [];
 
@@ -30,10 +31,9 @@ const getRestaurantName = (id) => {
 
 const fetchMenus = () => {
     return new Promise((resolve, reject) => {
-        Promise.all([
-            providers.bridges.fetch(),
-            providers.foodie.fetch()
-        ]).then((results) => {
+        Promise.all(
+            providers.map((provider) => provider.fetch())
+        ).then((results) => {
             database.push(...results);
             service.log('Restaurant pages has been fetched.');
             resolve(database);
