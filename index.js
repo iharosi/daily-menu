@@ -87,7 +87,11 @@ const init = () => {
     fetchMenus()
         .then(launchWebService)
         .catch((error) => {
-            service.exitWithError(error.message, error.code);
+            if (error) {
+                service.exitWithError(error.message, error.code);
+            } else {
+                service.exitWithError(error);
+            }
         });
     setInterval(fetchMenus, interval);
 };
