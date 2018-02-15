@@ -13,10 +13,12 @@ const service = require('./helpers/service');
 const providers = [
     require('./providers/amici'),
     require('./providers/bridges'),
+    require('./providers/burgerking'),
     require('./providers/dezsoba'),
     require('./providers/foodie'),
     require('./providers/kompot'),
     require('./providers/portum'),
+    require('./providers/subway'),
     require('./providers/10minutes')
 ];
 const interval = 1000 * 60 * 60; // 1 hour
