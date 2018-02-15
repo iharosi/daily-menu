@@ -5,7 +5,7 @@ const url = require('url');
 const moment = require('moment');
 const request = require('request-promise-native');
 const fbGrapApiUrl = 'https://graph.facebook.com/v2.12';
-const fbId = 'KompotBisztro';
+const fbId = '405687736167829';
 const defaultOptions = {
     qs: {
         access_token: process.env.FB_ACCESS_TOKEN // eslint-disable-line camelcase
@@ -61,7 +61,7 @@ const getDataFromPost = (fbPosts) => {
     if (fbPosts && fbPosts.data) {
         todayPosts = fbPosts.data
             .filter((post) => {
-                return post.message.indexOf('#ebedmenu') >= 0;
+                return post.message && post.message.indexOf('#ebedmenu') >= 0;
             })
             .filter((post) => {
                 return moment().isSame(moment(post.created_time), 'day');

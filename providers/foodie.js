@@ -30,7 +30,7 @@ const getDataFromPost = (fbPosts) => {
     if (fbPosts && fbPosts.data) {
         todayPosts = fbPosts.data
             .filter((post) => {
-                return post.message.indexOf('Leveseink') >= 0;
+                return post.message && post.message.indexOf('Leveseink') >= 0;
             })
             .filter((post) => {
                 return moment().isSame(moment(post.created_time), 'day');
