@@ -34,7 +34,7 @@ const fetchMenus = () => {
 
 const launchWebService = () => {
     let app = express();
-    let port = process.env.PORT || 3000;
+    let port = process.env.DAILY_MENU_PORT || 3000;
     let server;
 
     app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
