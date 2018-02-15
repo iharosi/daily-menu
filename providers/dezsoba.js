@@ -1,6 +1,5 @@
 'use strict';
 
-const url = require('url');
 const cheerio = require('cheerio');
 const moment = require('moment');
 const request = require('request');
@@ -49,10 +48,9 @@ const fetch = () => {
                 resolve({
                     id: 'dezsoba',
                     name: $('title').text().split(' - ')[0],
-                    logo: url.resolve(
-                        'http://dezsoba.hu',
-                        $('#sp-header #sp-logo .sp-retina-logo').attr('src')
-                    ),
+                    logo: ['https://scontent-vie1-1.xx.fbcdn.net/v/t31.0-8/',
+                        '12029644_1134502863257326_2736707117375738336_o.jpg',
+                        '?oh=768abaa231eb76cb0ef9b3b24f0167c3&oe=5B148980'].join(''),
                     url: options.url,
                     menu: menu,
                     lastUpdated: moment().format()
