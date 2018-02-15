@@ -14,6 +14,7 @@ const providers = [
     require('./providers/bridges'),
     require('./providers/dezsoba'),
     require('./providers/foodie'),
+    require('./providers/kompot'),
     require('./providers/10minutes')
 ];
 const interval = 1000 * 60 * 60; // 1 hour
