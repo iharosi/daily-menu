@@ -12,6 +12,7 @@ const path = require('path');
 const service = require('./helpers/service');
 const providers = [
     require('./providers/bridges'),
+    require('./providers/dezsoba'),
     require('./providers/foodie'),
     require('./providers/10minutes')
 ];
