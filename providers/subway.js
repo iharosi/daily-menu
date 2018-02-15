@@ -16,7 +16,7 @@ const fetch = () => {
     return new Promise((resolve) => {
         resolve({
             id: 'subway',
-            name: 'Subway',
+            name: 'SUBWAY® Hungary',
             logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/' +
                 'Subway_2016_logo.svg/640px-Subway_2016_logo.svg.png',
             url: 'https://www.subwayhungary.com/images/menu/WEB_NYITO_SOTD_644x360.jpg',
