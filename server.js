@@ -11,6 +11,7 @@ const morgan = require('morgan');
 const path = require('path');
 const service = require('./helpers/service');
 const providers = [
+    require('./providers/amici'),
     require('./providers/bridges'),
     require('./providers/dezsoba'),
     require('./providers/foodie'),
