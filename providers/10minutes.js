@@ -26,23 +26,25 @@ const fetch = () => {
             } else {
                 let result = JSON.parse(body);
                 let lines = result.ParsedResults[0].ParsedText.split(' \r\n');
-                let menu;
+                let menu = [];
 
-                menu = lines
-                    .filter((line) => line !== '')
-                    .map((line) => {
-                        let newLine = line;
+                if (lines[0].trim() === moment().tz('Europe/Budapest').format('YYYY.MM.DD.')) {
+                    menu = lines
+                        .filter((line) => line !== '')
+                        .map((line) => {
+                            let newLine = line;
 
-                        if (line.match(/^\d{3,4}\.-/)) {
-                            newLine = '';
-                        }
-                        if (line === 'D Menü') {
-                            newLine = 'B Menü';
-                        }
+                            if (line.match(/^\d{3,4}\.-/)) {
+                                newLine = '';
+                            }
+                            if (line === 'D Menü') {
+                                newLine = 'B Menü';
+                            }
 
-                        return newLine;
-                    })
-                    .slice(1, -2);
+                            return newLine;
+                        })
+                        .slice(1, -2);
+                }
 
                 resolve({
                     id: '10minutes',
