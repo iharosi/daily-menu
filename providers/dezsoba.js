@@ -1,7 +1,7 @@
 'use strict';
 
 const cheerio = require('cheerio');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const request = require('request');
 const options = {
     url: 'http://dezsoba.hu/hu/heti-menue',
@@ -35,7 +35,7 @@ const fetch = () => {
             if (error || response.statusCode !== 200) {
                 reject(error);
             } else {
-                let today = moment().isoWeekday();
+                let today = moment().tz('Europe/Budapest').isoWeekday();
                 let menu = [];
                 let $ = cheerio.load(body);
                 let todaysMenu = $(`#sp-page-builder .sp-fancy-menu-content ` +

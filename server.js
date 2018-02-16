@@ -9,6 +9,7 @@ const express = require('express');
 const favicon = require('serve-favicon');
 const morgan = require('morgan');
 const path = require('path');
+const moment = require('moment-timezone');
 const service = require('./helpers/service');
 const providers = [
     require('./providers/amici'),
@@ -21,19 +22,36 @@ const providers = [
     require('./providers/subway'),
     require('./providers/10minutes')
 ];
-const interval = 1000 * 60 * 60; // 1 hour
+const interval = 1000 * 60 * 2; // 2 minutes
 let database = [];
 
 const fetchMenus = () => {
     return new Promise((resolve, reject) => {
-        Promise.all(
-            providers.map((provider) => provider.fetch())
-        ).then((results) => {
-            database = [];
-            database.push(...results);
-            service.log('Restaurant pages has been fetched.');
-            resolve(database);
-        }).catch(reject);
+        let hour = Number.parseInt(moment().tz('Europe/Budapest').format('H'), 10);
+
+        if (database.length) {
+            if (hour >= 10 && hour < 12) {
+                database.forEach((restaurant, index) => {
+                    if (!restaurant.menu || restaurant.menu.length === 0) {
+                        providers[index].fetch()
+                            .then((result) => {
+                                database[index] = result;
+                                service.log(`${restaurant.name} has been fetched.`);
+                            })
+                            .catch(reject);
+                    }
+                });
+            }
+        } else {
+            Promise.all(
+                providers.map((provider) => provider.fetch())
+            ).then((results) => {
+                database = [];
+                database.push(...results);
+                service.log('Restaurant pages has been fetched.');
+                resolve(database);
+            }).catch(reject);
+        }
     });
 };
 

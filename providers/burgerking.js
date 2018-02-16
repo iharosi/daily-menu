@@ -1,6 +1,6 @@
 'use strict';
 
-const moment = require('moment');
+const moment = require('moment-timezone');
 const subOfTheDay = [
     '',
     'WHOPPER',
@@ -22,7 +22,7 @@ const fetch = () => {
             url: 'http://burgerking.hu/sites/burgerking.hu/files/' +
                 'HetkozNapiBKmenu_Mindentermek_lista_1000x550px.jpg',
             menu: ['Hétköznapi Burger King menü:',
-                subOfTheDay[moment().isoWeekday()]],
+                subOfTheDay[moment().tz('Europe/Budapest').isoWeekday()]],
             lastUpdated: moment().format()
         });
     });

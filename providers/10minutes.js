@@ -1,7 +1,7 @@
 'use strict';
 
 const request = require('request');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const options = {
     url: 'https://api.ocr.space/parse/imageurl',
     qs: {

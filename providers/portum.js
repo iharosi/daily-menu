@@ -2,7 +2,7 @@
 
 const _ = require('lodash');
 const url = require('url');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const request = require('request-promise-native');
 const fbGrapApiUrl = 'https://graph.facebook.com/v2.12';
 const fbId = '728866253985071';
@@ -54,7 +54,7 @@ const getDataFromPost = (fbPosts) => {
                 return post.message && post.message.indexOf('Heti Business Lunch') >= 0;
             })
             .filter((post) => {
-                return moment().isSame(moment(post.created_time), 'week');
+                return moment().tz('Europe/Budapest').isSame(moment(post.created_time), 'week');
             });
     }
 
