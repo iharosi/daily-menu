@@ -29,20 +29,28 @@ const fetchMenus = () => {
     return new Promise((resolve, reject) => {
         let hour = Number.parseInt(moment().tz('Europe/Budapest').format('H'), 10);
 
-        if (database.length) {
-            if (hour >= 10 && hour < 12) {
-                database.forEach((restaurant, index) => {
-                    if (!restaurant.menu || restaurant.menu.length === 0) {
-                        providers[index].fetch()
-                            .then((result) => {
-                                database[index] = result;
-                                service.log(`${restaurant.name} has been fetched.`);
-                            })
-                            .catch(reject);
-                    }
-                });
-            }
-        } else {
+        if (database.length && hour === 0) {
+            database.map((entry) => {
+                if (entry.menu && entry.menu.length) {
+                    entry.menu = [];
+                }
+
+                return entry;
+            });
+        }
+        if (database.length && hour >= 10 && hour < 12) {
+            database.forEach((restaurant, index) => {
+                if (!restaurant.menu || restaurant.menu.length === 0) {
+                    providers[index].fetch()
+                        .then((result) => {
+                            database[index] = result;
+                            service.log(`${restaurant.name} has been fetched.`);
+                        })
+                        .catch(reject);
+                }
+            });
+        }
+        if (!database.length) {
             Promise.all(
                 providers.map((provider) => provider.fetch())
             ).then((results) => {
