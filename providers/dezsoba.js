@@ -17,7 +17,7 @@ const options = {
 const getFormattedTexts = (element) => {
     let processed = [];
 
-    if (element.childNodes) {
+    if (element && element.childNodes) {
         processed = []
             .filter.call(
                 element.childNodes,
