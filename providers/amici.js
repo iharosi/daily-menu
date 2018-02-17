@@ -31,7 +31,7 @@ const days = [
 ];
 
 const partialIndexOf = (textLines, partialText, from = 0) => {
-    let foundAt = 0;
+    let foundAt = -1;
 
     textLines.find((element, index) => {
         let result = false;
@@ -73,10 +73,12 @@ const getDataFromPost = (fbPosts) => {
         let from = partialIndexOf(post, days[moment().tz('Europe/Budapest').isoWeekday()]);
         let to = (partialIndexOf(post, 'B:', from) || (post.indexOf('', from) - 1)) + 1;
 
-        payload.postUrl = todayPosts[0].permalink_url;
-        payload.menu = post.slice(from + 1, to)
-            .map((line) => line.trim())
-            .filter((line) => line !== '');
+        if (from !== -1) {
+            payload.postUrl = todayPosts[0].permalink_url;
+            payload.menu = post.slice(from + 1, to)
+                .map((line) => line.trim())
+                .filter((line) => line !== '');
+        }
     }
 
     return payload;
