@@ -62,9 +62,6 @@ const getDataFromPost = (fbPosts) => {
         todayPosts = fbPosts.data
             .filter((post) => {
                 return post.message && post.message.indexOf('Heti menünk') >= 0;
-            })
-            .filter((post) => {
-                return moment().isoWeek() === moment(post.created_time).isoWeek();
             });
     }
 
