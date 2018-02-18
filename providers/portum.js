@@ -54,7 +54,7 @@ const getDataFromPost = (fbPosts) => {
                 return post.message && post.message.indexOf('Heti Business Lunch') >= 0;
             })
             .filter((post) => {
-                return moment().tz('Europe/Budapest').isSame(moment(post.created_time), 'week');
+                return moment().isoWeek() === moment(post.created_time).isoWeek();
             });
     }
 
