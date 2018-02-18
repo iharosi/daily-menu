@@ -17,6 +17,8 @@ const providers = [
     require('./providers/burgerking'),
     require('./providers/dezsoba'),
     require('./providers/foodie'),
+    require('./providers/gilice'),
+    require('./providers/greenhouse'),
     require('./providers/kompot'),
     require('./providers/mini'),
     require('./providers/portum'),
