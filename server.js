@@ -19,6 +19,7 @@ const providers = [
     require('./providers/foodie'),
     require('./providers/kompot'),
     require('./providers/portum'),
+    require('./providers/stex'),
     require('./providers/subway'),
     require('./providers/10minutes')
 ];
