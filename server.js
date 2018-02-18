@@ -18,6 +18,7 @@ const providers = [
     require('./providers/dezsoba'),
     require('./providers/foodie'),
     require('./providers/kompot'),
+    require('./providers/mini'),
     require('./providers/portum'),
     require('./providers/stex'),
     require('./providers/subway'),
