@@ -52,10 +52,10 @@ const getDataFromPost = (fbPosts) => {
     if (fbPosts && fbPosts.data) {
         todayPosts = fbPosts.data
             .filter((post) => {
-                return post.message && post.message.indexOf('Mai menünk:') >= 0;
+                return moment().tz('Europe/Budapest').isSame(moment(post.created_time), 'day');
             })
             .filter((post) => {
-                return moment().tz('Europe/Budapest').isSame(moment(post.created_time), 'day');
+                return post.message && post.message.indexOf('Mai menü') >= 0;
             });
     }
 
@@ -64,7 +64,7 @@ const getDataFromPost = (fbPosts) => {
         lines = todayPosts[0].message.split('\n');
         payload.menu = payload.menu.concat(
             lines
-                .slice(1 + partialIndexOf(lines, 'Mai menünk:'))
+                .slice(1 + partialIndexOf(lines, 'Mai menü'))
                 .slice(0, partialIndexOf(lines, 'Jó étvágyat') - 1)
                 .map((line) => line.trim())
         );
