@@ -85,22 +85,22 @@ const fetch = () => {
                 );
                 let menu = [];
 
-                if (moment().tz('Europe/Budapest').isoWeekday() < 6) {
-                    getMenu(menuImageSrc).then((response) => {
-                        menu = response;
-                    });
-                }
+                getMenu(menuImageSrc).then((response) => {
+                    if (moment().tz('Europe/Budapest').isoWeekday() < 6) {
+                        menu = menu.concat(response);
+                    }
 
-                resolve({
-                    id: 'stex',
-                    name: 'Stex Ház',
-                    logo: 'https://static.vialacdn.com/caterer/' +
-                        'sh-b2ebdc0e-6ba8-3840-7973-c3e163f48311/' +
-                        'sh-b2ebdc0e-6ba8-3840-7973-c3e163f48311_logo_220x200.png',
-                    url: options.url,
-                    menu: menu,
-                    lastUpdated: moment().format()
-                });
+                    resolve({
+                        id: 'stex',
+                        name: 'Stex Ház',
+                        logo: 'https://static.vialacdn.com/caterer/' +
+                            'sh-b2ebdc0e-6ba8-3840-7973-c3e163f48311/' +
+                            'sh-b2ebdc0e-6ba8-3840-7973-c3e163f48311_logo_220x200.png',
+                        url: options.url,
+                        menu: menu,
+                        lastUpdated: moment().format()
+                    });
+                }).catch(reject);
             }
         });
     });
