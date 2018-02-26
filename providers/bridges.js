@@ -15,15 +15,22 @@ const options = {
 };
 
 const getFormattedTexts = (element) => {
-    let processed = [];
+    let processed;
 
     if (element && element.childNodes) {
-        processed = []
-            .filter.call(
-                element.childNodes,
-                (item) => item.nodeType === 3
-            )
-            .map((item) => item.nodeValue.trim());
+        processed = [].reduce.call(element.childNodes, (previous, current) => {
+            let arr;
+
+            if (current.nodeType === 3) {
+                arr = previous.concat([current.nodeValue.trim()]);
+            } else {
+                arr = previous.concat(getFormattedTexts(current));
+            }
+
+            return arr;
+        }, []);
+    } else {
+        processed = [];
     }
 
     return processed;
@@ -38,7 +45,7 @@ const fetch = () => {
                 let today = moment().tz('Europe/Budapest').isoWeekday() - 1;
                 let menu = [];
                 let $ = cheerio.load(body);
-                let $days = $('section#heti-menu .vc_row .parallax-desc>p:first-child').get(today);
+                let $days = $('section#heti-menu .vc_column_inner .parallax-desc').get(today);
                 let $dessert = $('section#heti-menu .wpb_text_column.wpb_content_element p').get(0);
 
                 menu = menu.concat(getFormattedTexts($days));
