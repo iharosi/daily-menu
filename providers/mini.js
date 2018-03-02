@@ -36,14 +36,17 @@ const fetch = () => {
                 let encoding = new Iconv('ISO-8859-2', 'UTF-8');
                 let $ = cheerio.load(encoding.convert(body).toString('UTF8'));
                 let $lines = $('table>tbody>tr').map((index, element) => {
-                    let currentThirdColumn = $(element).find('td:nth-child(3)').text();
-                    let currentFirstColumn = $(element).find('td:nth-child(1)').text();
+                    let secondColumn = $(element).find('td:nth-child(2)').text();
+                    let thirdColumn = $(element).find('td:nth-child(3)').text();
+                    let firstColumn = $(element).find('td:nth-child(1)').text();
                     let newItem = '';
 
-                    if (days.indexOf(currentThirdColumn) >= 0) {
-                        newItem = currentThirdColumn.toUpperCase();
+                    if (days.indexOf(thirdColumn) >= 0) {
+                        newItem = thirdColumn;
+                    } else if (days.indexOf(secondColumn) >= 0) {
+                        newItem = secondColumn;
                     } else {
-                        newItem = currentFirstColumn.replace(/\n/, '').replace('  ', ' ').trim();
+                        newItem = firstColumn.replace(/\n/, '').replace('  ', ' ').trim();
                     }
 
                     return newItem;
