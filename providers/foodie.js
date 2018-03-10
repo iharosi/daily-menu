@@ -30,7 +30,7 @@ const getDataFromPost = (fbPosts) => {
     if (fbPosts && fbPosts.data) {
         todayPosts = fbPosts.data
             .filter((post) => {
-                return post.message && post.message.indexOf('Leveseink') >= 0;
+                return post.message && post.message.indexOf('Leves') >= 0;
             })
             .filter((post) => {
                 return moment().tz('Europe/Budapest').isSame(moment(post.created_time), 'day');
@@ -40,7 +40,7 @@ const getDataFromPost = (fbPosts) => {
     if (todayPosts.length) {
         payload.postUrl = todayPosts[0].permalink_url;
         payload.menu = payload.menu.concat(todayPosts[0].message
-            .slice(todayPosts[0].message.indexOf('Leveseink'))
+            .slice(todayPosts[0].message.indexOf('Leves'))
             .split('\n')
             .filter((line, index, array) => {
                 let keep = true;
