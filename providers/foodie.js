@@ -19,9 +19,21 @@ const defaultOptions = {
     },
     json: true
 };
+const splitWords = [
+    'Desszertjeink:\n',
+    'Desszertjeink\n',
+    'Desszert:\n',
+    'Desszert\n',
+    'Leveseink:\n',
+    'Leveseink\n',
+    'Levesek:\n',
+    'Levesek\n'
+];
 
 const getDataFromPost = (fbPosts) => {
     let todayPosts;
+    let breakpoint;
+    let post;
     let payload = {
         postUrl: null,
         menu: []
@@ -39,8 +51,10 @@ const getDataFromPost = (fbPosts) => {
 
     if (todayPosts.length) {
         payload.postUrl = todayPosts[0].permalink_url;
+        post = todayPosts[0].message;
+        breakpoint = post.indexOf(splitWords.find((word) => post.indexOf(word) >= 0));
         payload.menu = payload.menu.concat(todayPosts[0].message
-            .slice(todayPosts[0].message.indexOf('Leves'))
+            .slice(breakpoint)
             .split('\n')
             .filter((line, index, array) => {
                 let keep = true;
@@ -53,7 +67,6 @@ const getDataFromPost = (fbPosts) => {
                 return keep;
             }));
     }
-
     return payload;
 };
 
