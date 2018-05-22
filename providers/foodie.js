@@ -20,14 +20,14 @@ const defaultOptions = {
     json: true
 };
 const splitWords = [
-    'Desszertjeink:\n',
-    'Desszertjeink\n',
-    'Desszert:\n',
-    'Desszert\n',
-    'Leveseink:\n',
-    'Leveseink\n',
-    'Levesek:\n',
-    'Levesek\n'
+    'Desszertjeink:',
+    'Desszertjeink',
+    'Desszert:',
+    'Desszert',
+    'Leveseink:',
+    'Leveseink',
+    'Levesek:',
+    'Levesek'
 ];
 
 const getDataFromPost = (fbPosts) => {
@@ -115,6 +115,7 @@ const fetch = () => {
                 getDataFromPicture(responses[2])
             );
         }).then((payload) => {
+            console.log(payload);
             resolve({
                 id: 'foodie',
                 name: payload.name,
