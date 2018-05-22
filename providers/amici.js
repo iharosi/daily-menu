@@ -61,10 +61,8 @@ const getDataFromPost = (fbPosts) => {
     if (fbPosts && fbPosts.data) {
         todayPosts = fbPosts.data
             .filter((post) => {
-                console.log(post);
                 return post.message && post.message.indexOf('Hétfő') >= 0;
             });
-        console.log(todayPosts);
     }
 
     if (todayPosts.length) {
