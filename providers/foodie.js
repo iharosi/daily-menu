@@ -115,7 +115,6 @@ const fetch = () => {
                 getDataFromPicture(responses[2])
             );
         }).then((payload) => {
-            console.log(payload);
             resolve({
                 id: 'foodie',
                 name: payload.name,
